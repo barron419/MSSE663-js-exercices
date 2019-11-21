@@ -26,7 +26,7 @@ console.log(monkey.intro());
  * #6 Then call its method and output to the console.
  */
 
-class monkey {
+class Monkey {
     constructor(name, age, gender, catchphrase) {
         this.name = name;
         this.age = age;
@@ -34,24 +34,18 @@ class monkey {
         this.catchphrase = catchphrase;
     }
 
-    get bio() {
-        return this.getBio();
-    }
-
+   
     getBio() {
         return this.name + " is a " + this.age + " year old " + this.gender + " monkey.";
     }
 
-    get intro() {
-        return this.getIntro();
-    }
-
+    
     getIntro() {
         return "Hello, my name is " + this.name + " and I like to say " + this.catchphrase + ".";
     }
 }
 
-const george = new monkey("George", 35, "Male", "Hello World"); 
-console.log(george.bio);
-console.log(george.intro);
+const george = new Monkey("George", 35, "Male", "Hello World"); 
+console.log(george.getBio());
+console.log(george.getIntro());
 
