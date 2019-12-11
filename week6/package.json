@@ -1,0 +1,27 @@
+{
+  "name": "week3",
+  "version": "1.0.0",
+  "description": "Week 3 assignments",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint **/*.ts --fix",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "dev": "ts-node src/spread.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/typescript": "^2.0.0",
+    "typescript": "^3.7.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.6",
+    "@types/mocha": "^5.2.7",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.7.2",
+    "mocha": "^6.2.2",
+    "ts-node": "^8.5.4"
+  }
+}
