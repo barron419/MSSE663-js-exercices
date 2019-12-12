@@ -11,11 +11,18 @@
 
 export const things = ['thing1', 'thing2'];
 
-export const thing2 = things.map(n => ({name: n}));
+console.log(mapThings(things));
+
+export function mapThings(map: Array<any>) {
+    let mapped = new Array<any>();
+
+    mapped = map.map(n => ({id: map.indexOf(n) ,name: n}));
+    
+    return mapped;
+}
 
 
 
-console.log(thing2);
 /**
  * #2 Higher order then curry.
  *
@@ -23,3 +30,17 @@ console.log(thing2);
  * - Filter the results from 1 to return a single thing object.
  * - Hoist that filter callback and curry all functions.
  */
+
+console.log(filterThings('1', mapThings(things)));
+
+ export function filterThings(key: string, toBeFiltered: Array<any>) {
+    let filtered = new Array<any>();
+    let key2 = parseInt(key, 10);
+
+    filtered = toBeFiltered.filter(function(thing){
+        return toBeFiltered.indexOf(thing) == key2;      
+    });
+    return filtered;
+}
+
+ 
