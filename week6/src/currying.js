@@ -40,7 +40,7 @@ exports.doMathFunction = function (a) { return function (b) { return function (c
 }; }; };
 console.log(exports.doMathFunction(3)(4)(5));
 // #3 Write a curried function that returns an array containing the ninjas who have a black belt
-var ninjasOne = [
+exports.ninjasOne = [
     { name: 'Michelangelo', belt: 'white' },
     { name: 'Donatello', belt: 'green' },
     { name: 'Raphael', belt: 'black' },
@@ -54,7 +54,7 @@ var ninjasOne = [
     { name: 'Cammy', belt: 'black' },
     { name: 'Wong Fei-hung', belt: 'green' }
 ];
-var ninjasTwo = [
+exports.ninjasTwo = [
     { name: 'Michelangelo', belt: 'white' },
     { name: 'Donatello', belt: 'green' },
     { name: 'Raphael', belt: 'black' },
@@ -62,17 +62,17 @@ var ninjasTwo = [
     { name: 'The Rat', belt: 'black' }
 ];
 // source code here
-exports.ninjaFunction = function (ninjasOne) { return function (ninjasTwo) { return function (belt) {
-    var blackBelts = new Array();
+exports.ninjaBeltFunction = function (ninjasOne) { return function (ninjasTwo) { return function (belt) {
+    var belts = new Array();
     var ninjasThree = __spreadArrays(ninjasOne, ninjasTwo);
     ninjasThree.forEach(function (ninja) {
         if (ninja.belt == belt) {
-            blackBelts.push(ninja);
+            belts.push(ninja);
         }
     });
-    return blackBelts;
+    return belts;
 }; }; };
-console.log(exports.ninjaFunction(ninjasOne)(ninjasTwo)("green"));
+console.log(exports.ninjaBeltFunction(exports.ninjasOne)(exports.ninjasTwo)("black"));
 /**
  * #4 Write a curried function that returns a new array of ninja objects with "status" added to each object.
  * The status should be the value of whatever key in the status object matches the ninja's belt.
@@ -90,9 +90,27 @@ exports.gamerStatusTypes = {
     black: 'Legend'
 };
 // source code here
-exports.addStatusFunction = function (ninjasOne) { return function (ninjasTwo) { return function (statusTypes) { return function (gamerStatusTypes) {
-    var whiteBelts = exports.ninjaFunction(ninjasOne)(ninjasTwo)("white");
-    var blackBelts = exports.ninjaFunction(ninjasOne)(ninjasTwo)("black");
-    var greenBelts = exports.ninjaFunction(ninjasOne)(ninjasTwo)("green");
-    var whiteBeltStatus = whiteBelts.map(function (status) { return ({ "status:grasshopper":  }); });
-}; }; }; };
+// Create new Array of ninjas that includes status.
+// export const ninjaStatusFunction = (ninjas: Array<any>) => (stat: string) => {
+//   let ninjaArray = new Array<any>();
+//   ninjas.forEach(ninja => {
+//   ninjaArray.push({name: ninja.name, belt: ninja.belt, status: stat});  
+//   });
+//   return ninjaArray;
+// }
+// Match Statuses from statusTypes to ninjas by belt and add to their.
+exports.ninjaMapFunction = function (ninjas) {
+    ninjas.forEach(function (ninja) {
+        if (ninja.belt == 'white') {
+            ninja.status = exports.statusTypes.white;
+        }
+        else if (ninja.belt == 'green') {
+            ninja.status = exports.statusTypes.green;
+        }
+        else if (ninja.belt == 'black') {
+            ninja.status = exports.statusTypes.black;
+        }
+    });
+    return ninjas;
+};
+console.log(exports.ninjaMapFunction(exports.ninjasOne));

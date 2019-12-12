@@ -36,7 +36,7 @@ export const doMathFunction = (a: number) => (b:number) => (c:number) =>{
 
 console.log(doMathFunction(3)(4)(5));
 // #3 Write a curried function that returns an array containing the ninjas who have a black belt
-const ninjasOne = [
+export const ninjasOne = [
   { name: 'Michelangelo', belt: 'white' },
   { name: 'Donatello', belt: 'green' },
   { name: 'Raphael', belt: 'black' },
@@ -51,7 +51,7 @@ const ninjasOne = [
   { name: 'Wong Fei-hung', belt: 'green' }
 ];
 
-const ninjasTwo = [
+export const ninjasTwo = [
   { name: 'Michelangelo', belt: 'white' },
   { name: 'Donatello', belt: 'green' },
   { name: 'Raphael', belt: 'black' },
@@ -60,19 +60,19 @@ const ninjasTwo = [
 ];
 
 // source code here
-export const ninjaFunction = ( ninjasOne: Array<any> ) => ( ninjasTwo: Array<any> ) => ( belt: string ) => {
-  let blackBelts = new Array<any>();
+export const ninjaBeltFunction = ( ninjasOne: Array<any> ) => ( ninjasTwo: Array<any> ) => ( belt: string ) => {
+  let belts = new Array<any>();
   const ninjasThree = [...ninjasOne, ...ninjasTwo];
 
   ninjasThree.forEach(ninja => {
     if(ninja.belt==belt){
-      blackBelts.push(ninja);
+      belts.push(ninja);
     }
   })
 
-  return blackBelts;
+  return belts;
 }
-console.log(ninjaFunction(ninjasOne)(ninjasTwo)("green"));
+console.log(ninjaBeltFunction(ninjasOne)(ninjasTwo)("black"));
 
 /**
  * #4 Write a curried function that returns a new array of ninja objects with "status" added to each object.
@@ -94,11 +94,35 @@ export const gamerStatusTypes = {
 };
 
 // source code here
-export const addStatusFunction = ( ninjasOne: Array<any> ) => ( ninjasTwo: Array<any> ) => ( statusTypes: Array<any> ) => (gamerStatusTypes: Array <any> ) => {
-  const whiteBelts = ninjaFunction(ninjasOne)(ninjasTwo)("white");
-  const blackBelts = ninjaFunction(ninjasOne)(ninjasTwo)("black");
-  const greenBelts = ninjaFunction(ninjasOne)(ninjasTwo)("green");
 
+// Create new Array of ninjas that includes status.
+// export const ninjaStatusFunction = (ninjas: Array<any>) => (stat: string) => {
+//   let ninjaArray = new Array<any>();
 
+//   ninjas.forEach(ninja => {
+//   ninjaArray.push({name: ninja.name, belt: ninja.belt, status: stat});  
+//   });
 
-}
+//   return ninjaArray;
+// }
+
+// Match Statuses from statusTypes to ninjas by belt and add to their.
+export const ninjaMapFunction = (ninjas: Array<any>) => {
+ 
+  ninjas.forEach(ninja => {
+    if(ninja.belt == 'white') {
+      ninja.status = statusTypes.white;
+    }  
+    else if(ninja.belt == 'green') {
+      ninja.status = statusTypes.green;
+    } 
+    else if(ninja.belt == 'black') {
+      ninja.status = statusTypes.black;
+    } 
+  })
+
+  return ninjas;
+
+  };
+
+  console.log(ninjaMapFunction(ninjasOne));
